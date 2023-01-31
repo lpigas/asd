@@ -15,7 +15,7 @@ export default function HomePage() {
   useEffect(() => {
     setActiveUser();
   }, [activeDepart]);
-
+ console.log('asd')
   return (
     <div className="max-w-full">
       <Layout titlePage={"pharmbills"}>
