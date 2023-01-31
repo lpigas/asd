@@ -1,0 +1,7 @@
+{
+  "departaments": [
+    { "name": "APEX", "id": "1", "descr": "" },
+    { "name": "GLOBAL", "id": "2", "descr": "" },
+    { "name": "HOCS", "id": "3", "descr": "" }
+  ]
+}
