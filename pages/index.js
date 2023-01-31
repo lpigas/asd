@@ -4,9 +4,8 @@ import Leftblock from "scenes/LeftBlock/Leftblock";
 import Rightblock from "scenes/RightBlock/Rightblock";
 import { useStateContext } from "context/StateContext";
 
-const allusers = require("../const/allusers.json");
 const blob = require("../const/blob_data.json");
-'asdasdasd'
+
 
 export default function HomePage() {
   const { activeDepart, setActiveUser } = useStateContext();
@@ -16,7 +15,7 @@ export default function HomePage() {
   useEffect(() => {
     setActiveUser();
   }, [activeDepart]);
-657567567
+
   return (
     <div className="max-w-full">
       <Layout titlePage={"pharmbills"}>
