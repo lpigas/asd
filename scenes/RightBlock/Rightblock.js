@@ -1,3 +1,4 @@
+import MyModal from "components/modal/MyModal";
 import { useStateContext } from "context/StateContext";
 import React, { useEffect, useState } from "react";
 const blob = require("../../const/blob_data.json");
@@ -6,6 +7,9 @@ export default function Rightblock({ usersActiveDepart }) {
   const { activeUser, setActiveUser, activeDepart } = useStateContext();
   const [foldersDate, setFoldersDate] = useState();
   const [activeFolder, setActiveFolder] = useState();
+  const [bigPhoto, setBigPhoto] = useState();
+  const [bigPhotoVisible, setBigPhotoVisible] = useState(false);
+
   const [usersActiveDepartFiltred, setUsersActiveDepartFiltred] = useState([
     ...usersActiveDepart,
   ]);
@@ -19,11 +23,9 @@ export default function Rightblock({ usersActiveDepart }) {
     setActiveFolder();
   }, [activeDepart]);
 
-
   const str = `https://screenshotsscript.blob.core.windows.net/screenshots/${activeDepart}/${activeUser}/${activeFolder}/`;
 
   const filtredUser = (e) => {
-    console.log(e);
     setUsersActiveDepartFiltred(
       usersActiveDepart.filter((item) => item.toLowerCase().includes(e))
     );
@@ -31,8 +33,17 @@ export default function Rightblock({ usersActiveDepart }) {
   useEffect(() => {
     setUsersActiveDepartFiltred([...usersActiveDepart]);
   }, [usersActiveDepart]);
+
+  const openModal = (photoUrl) => {
+    setBigPhoto(photoUrl);
+    setBigPhotoVisible(true);
+  };
+
   return (
     <div className="">
+      <MyModal setVisible={setBigPhotoVisible} visible={bigPhotoVisible}>
+        <img src={bigPhoto}></img>
+      </MyModal>
       {!activeUser ? (
         <>
           <div className="flex justify-end p-4 ">
@@ -122,7 +133,7 @@ export default function Rightblock({ usersActiveDepart }) {
             </div>
           ) : (
             <div className="flex flex-col">
-              <div className="flex justify-end m-[15px]">
+              <div className="flex justify-end m-[15px] ">
                 <img
                   alt="Back"
                   src="/image/back.png"
@@ -135,7 +146,11 @@ export default function Rightblock({ usersActiveDepart }) {
                 {blob[activeDepart][0][activeUser] &&
                   blob[activeDepart][0][activeUser][0][activeFolder].map(
                     (photo) => (
-                      <div className="w-[100px] h-[100px] m-6">
+                      <div
+                        className="w-[100px] h-[100px] m-6"
+                        key={photo}
+                        onClick={() => openModal(str + photo)}
+                      >
                         <img src={str + photo} alt={photo}></img>
                         <span>{photo}</span>
                       </div>

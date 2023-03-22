@@ -6,7 +6,6 @@ import { useStateContext } from "context/StateContext";
 
 const blob = require("../const/blob_data.json");
 
-
 export default function HomePage() {
   const { activeDepart, setActiveUser } = useStateContext();
   const usersActiveDepart =
@@ -15,7 +14,6 @@ export default function HomePage() {
   useEffect(() => {
     setActiveUser();
   }, [activeDepart]);
- console.log('asd')
   return (
     <div className="max-w-full">
       <Layout titlePage={"pharmbills"}>
